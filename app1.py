@@ -1,4 +1,8 @@
+# ################################
 # OpenAI Assistant를 활용한 예시
+# ################################
+
+########## 구성 값 ##########
 
 assistant_id = "asst_sNkm1WLJsosjb6PQzSkFs6l8"
 title = "나만의 챗봇"
@@ -19,6 +23,9 @@ messages_base = [
     },
 ]
 
+
+
+##############################################################################################
 
 import streamlit as st
 from openai import OpenAI
