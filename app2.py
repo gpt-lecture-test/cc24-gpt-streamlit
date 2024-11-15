@@ -5,7 +5,7 @@
 ########## 구성 값 ##########
 
 assistant_id = "asst_sNkm1WLJsosjb6PQzSkFs6l8"
-title = "나만의 챗봇"
+title = "어시스턴트 챗봇"
 messages_base = [
     {
       "role": "user",
