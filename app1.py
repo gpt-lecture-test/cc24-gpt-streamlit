@@ -56,9 +56,9 @@ if "openai_model" not in st.session_state:
 if "messages" not in st.session_state:
     st.session_state.messages = messages_base.copy()
 
-# for message in st.session_state.messages:
-#     with st.chat_message(message["role"]):
-#         st.markdown(message["content"])
+for message in st.session_state.messages[len(messages_base):]:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"][0]["text"])
 
 if user_input := st.chat_input("What is up?"):
     user_message = {
