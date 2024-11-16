@@ -86,7 +86,7 @@ for message in st.session_state.messages[len(messages_base):]:
 # Fixed position for input fields (bottom of page)
 
 user_input = st.chat_input("메시지를 입력하세요")
-uploaded_image = st.file_uploader("이미지를 업로드하세요", type=["png", "jpg", "jpeg"])
+uploaded_image = st.file_uploader("이미지를 업로드하세요!", type=["png", "jpg", "jpeg"])
 if user_input :
     user_message = {"role": "user", "content": []}
 
