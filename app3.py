@@ -79,14 +79,14 @@ for message in st.session_state.messages[len(messages_base):]:
             elif content["type"] == "image_url":
                 st.image(content["image_url"]["url"], use_column_width=True)
 
-# # Chat input handling
-# user_input = st.chat_input("메시지를 입력하세요 (이미지 업로드는 아래 기능 사용)")
-# uploaded_image = st.file_uploader("이미지를 업로드하세요", type=["png", "jpg", "jpeg"])
+# **Input layout: Add container for alignment**
+with st.container():
+    col1, col2 = st.columns([4, 1])  # Adjust column ratio if needed
+    with col1:  # Text input
+        user_input = st.chat_input("메시지를 입력하세요")
+    with col2:  # Image upload
+        uploaded_image = st.file_uploader("이미지 업로드", type=["png", "jpg", "jpeg"])
 
-# Fixed position for input fields (bottom of page)
-
-user_input = st.chat_input("메시지를 입력하세요")
-uploaded_image = st.file_uploader("이미지를 업로드하세요!", type=["png", "jpg", "jpeg"])
 if user_input :
     user_message = {"role": "user", "content": []}
 
