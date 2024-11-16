@@ -79,11 +79,11 @@ for message in st.session_state.messages[len(messages_base):]:
             elif content["type"] == "image_url":
                 st.image(content["image_url"]["url"], use_column_width=True)
 
-with st.container():
-    user_input = st.chat_input("메시지를 입력하세요")  # Text input at the bottom
-    uploaded_image = st.file_uploader("이미지를 업로드하세요", type=["png", "jpg", "jpeg"])  # Image uploader immediately below input
+# with st.container():
+#     user_input = st.chat_input("메시지를 입력하세요")  # Text input at the bottom
+#     uploaded_image = st.file_uploader("이미지를 업로드하세요", type=["png", "jpg", "jpeg"])  # Image uploader immediately below input
 
-if user_input :
+if (user_input :=st.chat_input("메시지를 입력하세요")) or (uploaded_image := st.file_uploader("이미지를 업로드하세요", type=["png", "jpg", "jpeg"]))
     user_message = {"role": "user", "content": []}
 
     # Append text input to message
