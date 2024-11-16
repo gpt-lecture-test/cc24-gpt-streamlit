@@ -79,13 +79,9 @@ for message in st.session_state.messages[len(messages_base):]:
             elif content["type"] == "image_url":
                 st.image(content["image_url"]["url"], use_column_width=True)
 
-# **Input layout: Add container for alignment**
 with st.container():
-    col1, col2 = st.columns([4, 1])  # Adjust column ratio if needed
-    with col1:  # Text input
-        user_input = st.chat_input("메시지를 입력하세요")
-    with col2:  # Image upload
-        uploaded_image = st.file_uploader("이미지 업로드", type=["png", "jpg", "jpeg"])
+    user_input = st.chat_input("메시지를 입력하세요")  # Text input at the bottom
+    uploaded_image = st.file_uploader("이미지를 업로드하세요", type=["png", "jpg", "jpeg"])  # Image uploader immediately below input
 
 if user_input :
     user_message = {"role": "user", "content": []}
