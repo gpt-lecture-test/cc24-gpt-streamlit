@@ -71,7 +71,7 @@ def get_base64_image_url(image):
     return f"data:image/{image_format.lower()};base64,{base64_image}"
 
 # Display chat history
-for message in st.session_state.messages:
+for message in st.session_state.messages[len(messages_base):]:
     with st.chat_message(message["role"]):
         for content in message["content"]:
             if content["type"] == "text":
@@ -79,11 +79,16 @@ for message in st.session_state.messages:
             elif content["type"] == "image_url":
                 st.image(content["image_url"]["url"], use_column_width=True)
 
-# Chat input handling
-user_input = st.chat_input("메시지를 입력하세요 (이미지 업로드는 아래 기능 사용)")
-uploaded_image = st.file_uploader("이미지를 업로드하세요", type=["png", "jpg", "jpeg"])
+# # Chat input handling
+# user_input = st.chat_input("메시지를 입력하세요 (이미지 업로드는 아래 기능 사용)")
+# uploaded_image = st.file_uploader("이미지를 업로드하세요", type=["png", "jpg", "jpeg"])
 
-if user_input or uploaded_image:
+# Input container (fixed position)
+with st.container():
+    user_input = st.chat_input("메시지를 입력하세요")
+    uploaded_image = st.file_uploader("이미지를 업로드하세요", type=["png", "jpg", "jpeg"])
+
+if user_input :
     user_message = {"role": "user", "content": []}
 
     # Append text input to message
