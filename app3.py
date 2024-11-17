@@ -82,6 +82,14 @@ for message in st.session_state.messages[len(messages_base):]:
 user_input = st.chat_input("메시지를 입력하세요")  # Text input at the bottom
 uploaded_image = st.file_uploader("이미지를 업로드하세요", type=["png", "jpg", "jpeg"])  # Image uploader immediately below input
 
+# Clear the previous image uploader when new image is uploaded
+if uploaded_image:
+    # Clear previous uploaded image and create a new one
+    st.session_state["image_uploaded"] = uploaded_image
+else:
+    st.session_state["image_uploaded"] = None
+
+
 if user_input :
     user_message = {"role": "user", "content": []}
 
@@ -93,7 +101,7 @@ if user_input :
             st.markdown(user_input)
 
     # Append image input to message
-    if uploaded_image:
+    if st.session_state.get("image_uploaded"):
         image = Image.open(uploaded_image)
         image_base64_url = get_base64_image_url(image)
         user_message["content"].append({"type": "image_url", "image_url": {"url": image_base64_url}})
