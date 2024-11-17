@@ -80,15 +80,7 @@ for message in st.session_state.messages[len(messages_base):]:
                 st.image(content["image_url"]["url"], use_column_width=True)
 
 user_input = st.chat_input("메시지를 입력하세요")  # Text input at the bottom
-uploaded_image = st.file_uploader("이미지를 업로드하세요", type=["png", "jpg", "jpeg"])  # Image uploader immediately below input
-
-# Clear the previous image uploader when new image is uploaded
-if uploaded_image:
-    # Clear previous uploaded image and create a new one
-    st.session_state["image_uploaded"] = uploaded_image
-else:
-    st.session_state["image_uploaded"] = None
-
+uploaded_image = st.file_uploader("이미지를 업로드하세요", type=["png", "jpg", "jpeg"])
 
 if user_input :
     user_message = {"role": "user", "content": []}
@@ -101,14 +93,16 @@ if user_input :
             st.markdown(user_input)
 
     # Append image input to message
-    if st.session_state.get("image_uploaded"):
+    if uploaded_image:
         image = Image.open(uploaded_image)
         image_base64_url = get_base64_image_url(image)
         user_message["content"].append({"type": "image_url", "image_url": {"url": image_base64_url}})
         st.session_state.messages.append(user_message)
         with st.chat_message("user"):
             st.image(image_base64_url, use_column_width=True)
-
+    if "uploaded_image" in st.session_state:
+        del st.session_state["uploaded_image"]
+    
     # Process messages with GPT model
     with st.chat_message("assistant"):
         stream = client.chat.completions.create(
