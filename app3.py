@@ -100,8 +100,7 @@ if user_input :
         st.session_state.messages.append(user_message)
         with st.chat_message("user"):
             st.image(image_base64_url, use_column_width=True)
-    if "uploaded_image" in st.session_state:
-        del st.session_state["uploaded_image"]
+    del uploaded_image
     
     # Process messages with GPT model
     with st.chat_message("assistant"):
